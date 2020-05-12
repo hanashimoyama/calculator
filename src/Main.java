@@ -9,14 +9,16 @@ public class Main {
             String line = sc.nextLine();
             String formula = line.replace(" ", "");
 
-            String operators [] = {"+","-","*","/"};
-            for(String operator:operators){
-             int operatorPosition = formula.indexOf(operator);
+            String operators[] = {"+", "-", "*", "/"};
+            for (String search : operators) {
+                int operatorPosition = formula.indexOf(search);
                 if (operatorPosition != -1) {
-                    System.out.println(operatorPosition); // 3
+                    String operator = formula.substring(operatorPosition);
                 } else {
 
                 }
+
+
             }
 
         }
