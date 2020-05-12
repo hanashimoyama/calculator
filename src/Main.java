@@ -13,7 +13,7 @@ public class Main {
             for (String search : operators) {
                 int operatorPosition = formula.indexOf(search);
                 if (operatorPosition != -1) {
-                    String operator = formula.substring(operatorPosition);
+                    String operator = formula.substring(operatorPosition,operatorPosition +1);
                 } else {
 
                 }
