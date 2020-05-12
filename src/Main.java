@@ -8,17 +8,17 @@ public class Main {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String formula = line.replace(" ", "");
-            System.out.println(formula);
 
             String operators [] = {"+","-","*","/"};
-            for(String formula:operator){
+            for(String operator:operators){
              int operatorPosition = formula.indexOf(operator);
                 if (operatorPosition != -1) {
                     System.out.println(operatorPosition); // 3
                 } else {
-                    System.out.println(operator + "は見つかりませんでした");
+
                 }
             }
+
         }
 
     }
