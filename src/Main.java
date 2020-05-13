@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static <string> void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        System.out.print("式:");
         out:
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
