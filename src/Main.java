@@ -22,9 +22,28 @@ public class Main {
                     int value1 = Integer.parseInt(num1);
                     int value2 = Integer.parseInt(num2);
 
+                    switch (operator) {
+
+                        case "+":
+                            total = value1 + value2 ;
+                            break;
+
+                        case "-":
+                            total = value1 - value2 ;
+                            break;
+
+                        case "*":
+                            total = value1 * value2 ;
+                            break;
+
+                        case "/":
+                            total = value1 / value2 ;
+                            break;
+                    }
                 } else {
                     continue;
                 }
+                System.out.println(total);
             }
         }
 
