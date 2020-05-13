@@ -14,8 +14,10 @@ public class Main {
                 int operatorPosition = formula.indexOf(search);
                 if (operatorPosition != -1) {
                     String operator = formula.substring(operatorPosition,operatorPosition +1);
+                    String num1 = formula.substring(operatorPosition +1);
+                    String num2 = formula.substring(0,operatorPosition);
                 } else {
-
+                    System.out.println("演算子を入力してください");
                 }
 
 
