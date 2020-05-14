@@ -2,88 +2,52 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args){
+    public static <string> void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        out : while (sc.hasNextLine()) {
+        System.out.print("式:");
+        out:
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
+            String formula = line.replace(" ", "");
 
-            String[] formula = line.split(" ");
+            int total = 0;
 
-            int total =0;
+            String operators[] = {"+", "-", "*", "/"};
+            for (String search : operators) {
+                int operatorPosition = formula.indexOf(search);
+                if (operatorPosition != -1) {
+                    String operator = formula.substring(operatorPosition, operatorPosition + 1);
+                    String num1 = formula.substring(0, operatorPosition);
+                    String num2 = formula.substring(operatorPosition + 1);
 
-            if (formula.length < 3 || ((formula.length != 3) && (formula.length % 3 != 2))) {
 
-                System.out.println("数値 演算子 数値 演算子 数値 … の順に最低3つの引数を指定してください");
-                continue;
+                    int value1 = Integer.parseInt(num1);
+                    int value2 = Integer.parseInt(num2);
 
-            } else {
+                    switch (operator) {
 
-                if (checkNum(formula[0])) {
+                        case "+":
+                            total = value1 + value2 ;
+                            break;
 
-                    total = Integer.parseInt(formula[0]);
+                        case "-":
+                            total = value1 - value2 ;
+                            break;
 
-                }
-                for (int i = 0; i <= ((formula.length - 3) / 2); i++) {
+                        case "*":
+                            total = value1 * value2 ;
+                            break;
 
-                    if (checkOperator(formula[i * 2 + 1]) && checkNum(formula[i * 2 + 2])) {
-
-                        switch (formula[i * 2 + 1]) {
-
-                            case "+":
-                                total = total + Integer.parseInt(formula[i * 2 + 2]);
-                                break;
-
-                            case "-":
-                                total = total - Integer.parseInt(formula[i * 2 + 2]);
-                                break;
-
-                            case "*":
-                                total = total * Integer.parseInt(formula[i * 2 + 2]);
-                                break;
-
-                            case "/":
-                                total = total / Integer.parseInt(formula[i * 2 + 2]);
-                                break;
-
-                        }
-
-                    } else {
-                        System.out.println("数値 演算子 数値 演算子 数値 … の順に引数を指定してください");
-                        continue out;
+                        case "/":
+                            total = value1 / value2 ;
+                            break;
                     }
-
+                } else {
+                    continue;
                 }
-
-                System.out.println("合計:" + total);
+                System.out.println(total);
             }
         }
 
-        sc.close();
-    }
-
-    private static boolean checkNum(String str) {
-
-        try {
-
-            Integer.parseInt(str);
-
-        } catch (NumberFormatException e) {
-
-            return false;
-
-        }
-
-        return true;
-
-    }
-
-    private static boolean checkOperator(String str) {
-
-        if (str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/")) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
-
