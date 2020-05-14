@@ -17,8 +17,9 @@ public class Main {
                 int operatorPosition = formula.indexOf(search);
                 if (operatorPosition != -1) {
                     String operator = formula.substring(operatorPosition, operatorPosition + 1);
-                    String num1 = formula.substring(operatorPosition + 1);
-                    String num2 = formula.substring(0, operatorPosition);
+                    String num1 = formula.substring(0, operatorPosition);
+                    String num2 = formula.substring(operatorPosition + 1);
+
 
                     int value1 = Integer.parseInt(num1);
                     int value2 = Integer.parseInt(num2);
