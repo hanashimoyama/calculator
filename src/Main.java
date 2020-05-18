@@ -3,18 +3,15 @@ import java.util.Scanner;
 
 public class Main {
     public static <string> void main(String[] args) {
-        int value1 = 0;
-        int value2 = 0;
-        int total = 0;
 
         Scanner sc = new Scanner(System.in);
         System.out.print("式:");
-        out:
         while (sc.hasNextLine()) {
-            String line  = sc.nextLine();
+            String line = sc.nextLine();
             String formula = line.replace(" ", "");
 
-            String operators[] = {"+", "-", "*", "/"}; //数値の取得
+
+            /*String operators[] = {"+", "-", "*", "/"}; //数値の取得
             for (String search : operators) {
                 int operatorPosition = formula.indexOf(search);
                 if (operatorPosition != -1) {
@@ -46,10 +43,31 @@ public class Main {
                 } else {
                     continue;
                 }
-            }
+            }*/
         }
     }
+    public static int operatorsIndexOf(String formula){
+        int operatorPlusIndex = formula.indexOf("+");
+        int operatorMinusIndex = formula.indexOf("-");
+        int operatorMultiplicationIndex = formula.indexOf("*");
+        int operatorDivisionIndex = formula.indexOf("-");
+
+        int index = operatorPlusIndex;
+        if(index>operatorMinusIndex && operatorMinusIndex != -1){
+            index = operatorMinusIndex;
+        }
+        if(index>operatorMultiplicationIndex &&operatorMultiplicationIndex != -1){
+            index = operatorMultiplicationIndex;
+        }
+
+        if (index>operatorDivisionIndex && operatorDivisionIndex != -1){
+            index = operatorDivisionIndex;
+        }
+        return  index;
+    }
 }
+
+
 
 
 
