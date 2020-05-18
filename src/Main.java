@@ -9,6 +9,12 @@ public class Main {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String formula = line.replace(" ", "");
+            int total = 0;
+
+            int index1 = operatorsIndexOf(formula,0);
+            total = Integer.parseInt(formula.substring(0,index1));
+            int index2 = operatorsIndexOf(formula,index1+1);
+
 
 
             /*String operators[] = {"+", "-", "*", "/"}; //数値の取得
@@ -46,7 +52,7 @@ public class Main {
             }*/
         }
     }
-    public static int operatorsIndexOf(String formula){
+    public static int operatorsIndexOf(String formula,int start){
         int operatorPlusIndex = formula.indexOf("+");
         int operatorMinusIndex = formula.indexOf("-");
         int operatorMultiplicationIndex = formula.indexOf("*");
