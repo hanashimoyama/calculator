@@ -11,11 +11,9 @@ public class Main {
             String formula = line.replace(" ", "");
             int total = 0;
 
-            int index1 = operatorsIndexOf(formula,0);
-            total = Integer.parseInt(formula.substring(0,index1));
-            int index2 = operatorsIndexOf(formula,index1+1);
-
-
+            int index1 = operatorsIndexOf(formula,0);//演算子１
+            total = Integer.parseInt(formula.substring(0,index1));//合計をいれる値を作成
+            int index2 = operatorsIndexOf(formula,index1+1);//演算子２　index1+1を入れることで1つ目の演算子よりも後ろで検索する
 
             /*String operators[] = {"+", "-", "*", "/"}; //数値の取得
             for (String search : operators) {
@@ -53,20 +51,21 @@ public class Main {
         }
     }
     public static int operatorsIndexOf(String formula,int start){
-        int operatorPlusIndex = formula.indexOf("+");
-        int operatorMinusIndex = formula.indexOf("-");
-        int operatorMultiplicationIndex = formula.indexOf("*");
-        int operatorDivisionIndex = formula.indexOf("-");
+        int operatorPlusIndex = formula.indexOf("+",start); //文字列にそれぞれの演算子があるかチェック
+        int operatorMinusIndex = formula.indexOf("-",start);
+        int operatorMultiplicationIndex = formula.indexOf("*",start);
+        int operatorDivisionIndex = formula.indexOf("/",start);
 
-        int index = operatorPlusIndex;
-        if(index>operatorMinusIndex && operatorMinusIndex != -1){
+        int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
+
+        if(index==-1||(index>operatorMinusIndex && operatorMinusIndex != -1)){
             index = operatorMinusIndex;
         }
-        if(index>operatorMultiplicationIndex &&operatorMultiplicationIndex != -1){
+        if(index==-1||(index>operatorMultiplicationIndex &&operatorMultiplicationIndex != -1)){
             index = operatorMultiplicationIndex;
         }
 
-        if (index>operatorDivisionIndex && operatorDivisionIndex != -1){
+        if (index==-1||(index>operatorDivisionIndex && operatorDivisionIndex != -1)){
             index = operatorDivisionIndex;
         }
         return  index;
