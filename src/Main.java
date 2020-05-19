@@ -15,6 +15,30 @@ public class Main {
             total = Integer.parseInt(formula.substring(0,index1));//合計をいれる値を作成
             int index2 = operatorsIndexOf(formula,index1+1);//演算子２　index1+1を入れることで1つ目の演算子よりも後ろで検索する
 
+            while (index2 !=-1){
+                int value2 = Integer.parseInt(formula.substring(index1+1,index2)) ; //演算子があるか検索して見つかった時の処理
+                switch (formula.charAt(index1)){
+                    case '+':
+                        total = total + value2;
+                        break;
+
+                    case '-':
+                        total = total - value2;
+                        break;
+
+                    case '*':
+                        total = total * value2;
+                        break;
+
+                    case '/':
+                        total = total / value2;
+                        break;
+                }
+                index1 = index2;
+                index2 = operatorsIndexOf(formula,index2+1);
+            }
+
+
             /*String operators[] = {"+", "-", "*", "/"}; //数値の取得
             for (String search : operators) {
                 int operatorPosition = formula.indexOf(search);
