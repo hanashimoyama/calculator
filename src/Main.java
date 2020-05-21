@@ -67,9 +67,8 @@ public class Main {
                         total = total / value2;
                 }
                 System.out.println(total);
-
-
-                /*System.out.println("もう1度計算しますか？YESなら１を、NOなら２を押してください");
+                System.out.print("式:");
+               /*System.out.println("もう1度計算しますか？YESなら１を、NOなら２を押してください");
                 while(sc.hasNextLine()){
                     String continuity = sc.nextLine();
 
