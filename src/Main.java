@@ -7,14 +7,19 @@ public class Main {
     public static <string> void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("計算したい時:式を入力　終了したい時:endと入力");
         System.out.print("式:");
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String formula = line.replace(" ", "");
+            if(formula.equals("end")){
+                System.exit(0);
+            }
             int total = 0;
             int index1 = operatorsIndexOf(formula, 0);//演算子１
             if(index1 == -1){
                System.out.println("正しい式を入力してください");
+               System.out.print("式:");
                continue;
             }
 
@@ -63,7 +68,8 @@ public class Main {
                 }
                 System.out.println(total);
 
-                System.out.println("もう1度計算しますか？YESなら１を、NOなら２を押してください");
+
+                /*System.out.println("もう1度計算しますか？YESなら１を、NOなら２を押してください");
                 while(sc.hasNextLine()){
                     String continuity = sc.nextLine();
 
@@ -79,7 +85,7 @@ public class Main {
                         System.out.println("1か2を入力してください");
 
                     }
-                }
+                }*/
 
 
 
