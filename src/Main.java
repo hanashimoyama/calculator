@@ -16,12 +16,28 @@ public class Main {
             }
 
             int total = 0;
-            int index= operatorsIndexOf(formula);//演算子1
+            int index= operatorsIndexOf(formula,0);//演算子1
             if (index == -1) {
                 System.out.println("正しい式を入力してください");
                 System.out.print("式:");
                 continue;
             }
+                String formula2 = formula;
+                int firstOperatorIndex = firstOperatorsIndexOf(formula2, 0);
+                String before = formula2.substring(0, firstOperatorIndex);
+                String reverse = new StringBuilder(before).reverse().toString();
+                String after = formula2.substring(firstOperatorIndex+1);
+
+
+
+
+
+                /*int index1 = formula.indexOf(before);
+                int index2 = formula.lastIndexOf(index);
+
+                int value1 = Integer.parseInt(before.substring(index));
+                int value2 = Integer.parseInt(after.substring(index2));*/
+
 
 
             //to/合計をいれる値を作成tal = Integer.parseInt(formula.substring(0, index1));/
@@ -110,11 +126,11 @@ public class Main {
 
 
 
-    public static int operatorsIndexOf(String formula) {
-        int operatorPlusIndex = formula.indexOf("+"); //文字列にそれぞれの演算子があるかチェック
-        int operatorMinusIndex = formula.indexOf("-");
-        int operatorMultiplicationIndex = formula.indexOf("*");
-        int operatorDivisionIndex = formula.indexOf("/");
+    public static int operatorsIndexOf(String f,int start) {
+        int operatorPlusIndex = f.indexOf("+"); //文字列にそれぞれの演算子があるかチェック
+        int operatorMinusIndex = f.indexOf("-");
+        int operatorMultiplicationIndex = f.indexOf("*");
+        int operatorDivisionIndex = f.indexOf("/");
 
         int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
 
@@ -140,6 +156,47 @@ public class Main {
         }
         return firstIndex;
     }
+    /*public static int beforeOperatorsIndexOf(String reverse,int start) {
+        int operatorPlusIndex =reverse.indexOf("+",start); //文字列にそれぞれの演算子があるかチェック
+        int operatorMinusIndex = reverse.indexOf("-",start);
+        int operatorMultiplicationIndex = reverse.indexOf("*",start);
+        int operatorDivisionIndex =reverse.indexOf("/",start);
+
+        int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
+
+        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) { // 1+2+3だとして　indexが-1だと -1>2&&2!=1でforceになっちゃう
+            index = operatorMinusIndex;                                        //なので indexが-1の時も条件が通るようにする
+        }
+        if (index == -1 || (index > operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
+            index = operatorMultiplicationIndex;
+        }
+
+        if (index == -1 || (index > operatorDivisionIndex && operatorDivisionIndex != -1)) {
+            index = operatorDivisionIndex;
+        }
+        return index;
+    }
+
+    public static int afterOperatorsIndexOf(String after,int start) {
+        int operatorPlusIndex = after.indexOf("+",start); //文字列にそれぞれの演算子があるかチェック
+        int operatorMinusIndex = after.indexOf("-",start);
+        int operatorMultiplicationIndex = after.indexOf("*",start);
+        int operatorDivisionIndex = after.indexOf("/",start);
+
+        int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
+
+        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) { // 1+2+3だとして　indexが-1だと -1>2&&2!=1でforceになっちゃう
+            index = operatorMinusIndex;                                        //なので indexが-1の時も条件が通るようにする
+        }
+        if (index == -1 || (index > operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
+            index = operatorMultiplicationIndex;
+        }
+
+        if (index == -1 || (index > operatorDivisionIndex && operatorDivisionIndex != -1)) {
+            index = operatorDivisionIndex;
+        }
+        return index;
+    }*/
 }
 
 
