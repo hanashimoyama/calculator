@@ -28,6 +28,17 @@ public class Main {
                 String reverse = new StringBuilder(before).reverse().toString();
                 String after = formula2.substring(firstOperatorIndex+1);
 
+                int beforeOperatorIndex = operatorsIndexOf(reverse,0);
+                int afterOperatorIndex = operatorsIndexOf(after,0);
+
+                int value1 = Integer.parseInt(reverse.substring(0,beforeOperatorIndex));
+                int value2 = Integer.parseInt(after.substring(0,afterOperatorIndex));
+                
+
+
+
+
+
 
 
 
