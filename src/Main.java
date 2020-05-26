@@ -25,16 +25,30 @@ public class Main {
                 String formula2 = formula;
                 int firstOperatorIndex = firstOperatorsIndexOf(formula2, 0);
                 String before = formula2.substring(0, firstOperatorIndex);
-                String reverse = new StringBuilder(before).reverse().toString();
                 String after = formula2.substring(firstOperatorIndex+1);
 
-                int beforeOperatorIndex = operatorsIndexOf(reverse,0);
+
+                int beforeOperatorIndex = beforeOperatorsIndexOf(before,0);
                 int afterOperatorIndex = operatorsIndexOf(after,0);
 
-                int value1 = Integer.parseInt(reverse.substring(0,beforeOperatorIndex));
+                int value1 = Integer.parseInt(before.substring(beforeOperatorIndex+1));
                 int value2 = Integer.parseInt(after.substring(0,afterOperatorIndex));
-                
 
+                int result = 0;
+                switch(formula.charAt(firstOperatorIndex)){
+
+                    case '*':
+                    result = value1 * value2;
+                    break;
+
+
+                    case '/':
+                    result = value1 / value2;
+                    break;
+                }
+
+                formula2 = before.substring(0, beforeOperatorIndex+1)+result+after.substring(afterOperatorIndex);
+                System.out.println(formula2);
 
 
 
@@ -157,6 +171,7 @@ public class Main {
         }
         return index;
     }
+
     public static int firstOperatorsIndexOf(String formula,int start){
         int operatorMultiplicationIndex = formula.indexOf("*",start);
         int operatorDivisionIndex = formula.indexOf("/",start);
@@ -167,37 +182,36 @@ public class Main {
         }
         return firstIndex;
     }
-    /*public static int beforeOperatorsIndexOf(String reverse,int start) {
-        int operatorPlusIndex =reverse.indexOf("+",start); //文字列にそれぞれの演算子があるかチェック
+    public static int beforeOperatorsIndexOf(String reverse,int start) {
+        int operatorPlusIndex =reverse.indexOf("+",start);
         int operatorMinusIndex = reverse.indexOf("-",start);
         int operatorMultiplicationIndex = reverse.indexOf("*",start);
         int operatorDivisionIndex =reverse.indexOf("/",start);
 
-        int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
+        int index = operatorPlusIndex;
 
-        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) { // 1+2+3だとして　indexが-1だと -1>2&&2!=1でforceになっちゃう
-            index = operatorMinusIndex;                                        //なので indexが-1の時も条件が通るようにする
+        if (index == -1 || (index < operatorMinusIndex && operatorMinusIndex != -1)) {
+            index = operatorMinusIndex;
         }
-        if (index == -1 || (index > operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
+        if (index == -1 || (index < operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
             index = operatorMultiplicationIndex;
         }
 
-        if (index == -1 || (index > operatorDivisionIndex && operatorDivisionIndex != -1)) {
+        if (index == -1 || (index < operatorDivisionIndex && operatorDivisionIndex != -1)) {
             index = operatorDivisionIndex;
         }
         return index;
     }
 
-    public static int afterOperatorsIndexOf(String after,int start) {
-        int operatorPlusIndex = after.indexOf("+",start); //文字列にそれぞれの演算子があるかチェック
+    /*public static int afterOperatorsIndexOf(String after,int start) {
+        int operatorPlusIndex = after.indexOf("+",start);
         int operatorMinusIndex = after.indexOf("-",start);
         int operatorMultiplicationIndex = after.indexOf("*",start);
         int operatorDivisionIndex = after.indexOf("/",start);
 
-        int index = operatorPlusIndex;//＋を基準にして一番近い演算子を検索してくる
+        int index = operatorPlusIndex;
 
-        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) { // 1+2+3だとして　indexが-1だと -1>2&&2!=1でforceになっちゃう
-            index = operatorMinusIndex;                                        //なので indexが-1の時も条件が通るようにする
+        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) {
         }
         if (index == -1 || (index > operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
             index = operatorMultiplicationIndex;
