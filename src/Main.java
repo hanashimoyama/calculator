@@ -16,39 +16,41 @@ public class Main {
             }
 
             int total = 0;
-            int index= operatorsIndexOf(formula,0);//演算子1
+            int index = operatorsIndexOf(formula, 0);//演算子1
             if (index == -1) {
                 System.out.println("正しい式を入力してください");
                 System.out.print("式:");
                 continue;
             }
-                String formula2 = formula;
-                int firstOperatorIndex = firstOperatorsIndexOf(formula2, 0);
-                String before = formula2.substring(0, firstOperatorIndex);
-                String after = formula2.substring(firstOperatorIndex+1);
 
 
-                int beforeOperatorIndex = beforeOperatorsIndexOf(before,0);
-                int afterOperatorIndex = operatorsIndexOf(after,0);
+            String formula2 = formula;
+            int firstOperatorIndex = firstOperatorsIndexOf(formula2, 0);
+            String before = formula2.substring(0, firstOperatorIndex);
+            String after = formula2.substring(firstOperatorIndex + 1);
 
-                int value1 = Integer.parseInt(before.substring(beforeOperatorIndex+1));
-                int value2 = Integer.parseInt(after.substring(0,afterOperatorIndex));
 
-                int result = 0;
-                switch(formula.charAt(firstOperatorIndex)){
+            int beforeOperatorIndex = beforeOperatorsIndexOf(before, 0);
+            int afterOperatorIndex = operatorsIndexOf(after, 0);
 
-                    case '*':
+            int value1 = Integer.parseInt(before.substring(beforeOperatorIndex + 1));
+            int value2 = Integer.parseInt(after.substring(0, afterOperatorIndex));
+
+            int result = 0;
+            switch (formula.charAt(firstOperatorIndex)) {
+
+                case '*':
                     result = value1 * value2;
                     break;
 
 
-                    case '/':
+                case '/':
                     result = value1 / value2;
                     break;
-                }
+            }
 
-                formula2 = before.substring(0, beforeOperatorIndex+1)+result+after.substring(afterOperatorIndex);
-                System.out.println(formula2);
+            formula2 = before.substring(0, beforeOperatorIndex + 1) + result + after.substring(afterOperatorIndex);
+            System.out.println(formula2);
 
 
 
@@ -62,7 +64,6 @@ public class Main {
 
                 int value1 = Integer.parseInt(before.substring(index));
                 int value2 = Integer.parseInt(after.substring(index2));*/
-
 
 
             //to/合計をいれる値を作成tal = Integer.parseInt(formula.substring(0, index1));/
@@ -105,7 +106,7 @@ public class Main {
                 index1 = index2;
                 index2 = operatorsIndexOf(formula, index2 + 1);
             }
-            //ループ処理をぬけて演算子がこれ以上無いときの処理
+
             int value2 = Integer.parseInt(formula.substring(index1 + 1));
             switch (formula.charAt(index1)) {
                 case '+':
@@ -127,30 +128,14 @@ public class Main {
             }
             System.out.println(total);
             System.out.print("式:");
-               /*System.out.println("もう1度計算しますか？YESなら１を、NOなら２を押してください");
-                while(sc.hasNextLine()){
-                    String continuity = sc.nextLine();
 
-                    if(continuity.equals("1")){
-                        main(args);
-                    }
-
-                    if (continuity.equals("2")){
-                        System.exit(0);
-                    }
-
-                    else {
-                        System.out.println("1か2を入力してください");
-
-                    }
-                }*/
-        }
+        }*/
 
 
         }
 
 
-
+    }
     public static int operatorsIndexOf(String f,int start) {
         int operatorPlusIndex = f.indexOf("+"); //文字列にそれぞれの演算子があるかチェック
         int operatorMinusIndex = f.indexOf("-");
@@ -203,25 +188,6 @@ public class Main {
         return index;
     }
 
-    /*public static int afterOperatorsIndexOf(String after,int start) {
-        int operatorPlusIndex = after.indexOf("+",start);
-        int operatorMinusIndex = after.indexOf("-",start);
-        int operatorMultiplicationIndex = after.indexOf("*",start);
-        int operatorDivisionIndex = after.indexOf("/",start);
-
-        int index = operatorPlusIndex;
-
-        if (index == -1 || (index > operatorMinusIndex && operatorMinusIndex != -1)) {
-        }
-        if (index == -1 || (index > operatorMultiplicationIndex && operatorMultiplicationIndex != -1)) {
-            index = operatorMultiplicationIndex;
-        }
-
-        if (index == -1 || (index > operatorDivisionIndex && operatorDivisionIndex != -1)) {
-            index = operatorDivisionIndex;
-        }
-        return index;
-    }*/
 }
 
 
