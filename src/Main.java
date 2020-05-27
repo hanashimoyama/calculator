@@ -24,33 +24,66 @@ public class Main {
             }
 
 
-            String formula2 = formula;
-            int firstOperatorIndex = firstOperatorsIndexOf(formula2, 0);
-            String before = formula2.substring(0, firstOperatorIndex);
-            String after = formula2.substring(firstOperatorIndex + 1);
+            if(operatorsIndexOf(formula,0) != -1){
+                int firstOperatorIndex = firstOperatorsIndexOf(formula, 0);
+                String before = formula.substring(0, firstOperatorIndex);
+                String after = formula.substring(firstOperatorIndex + 1);
 
 
-            int beforeOperatorIndex = beforeOperatorsIndexOf(before, 0);
-            int afterOperatorIndex = operatorsIndexOf(after, 0);
+                int beforeOperatorIndex = beforeOperatorsIndexOf(before, 0);
+                int afterOperatorIndex = operatorsIndexOf(after, 0);
 
-            int value1 = Integer.parseInt(before.substring(beforeOperatorIndex + 1));
-            int value2 = Integer.parseInt(after.substring(0, afterOperatorIndex));
+                int value1 = Integer.parseInt(before.substring(beforeOperatorIndex + 1));
+                int value2 = Integer.parseInt(after.substring(0, afterOperatorIndex));
 
-            int result = 0;
-            switch (formula.charAt(firstOperatorIndex)) {
+                int result = 0;
+                switch (formula.charAt(firstOperatorIndex)) {
 
-                case '*':
-                    result = value1 * value2;
-                    break;
+                    case '*':
+                        result = value1 * value2;
+                        break;
 
 
-                case '/':
-                    result = value1 / value2;
-                    break;
+                    case '/':
+                        result = value1 / value2;
+                        break;
+                }
+
+                String formula2 = before.substring(0, beforeOperatorIndex + 1) + result + after.substring(afterOperatorIndex);
+
+
+                while(operatorsIndexOf(formula2,0)!= -1){
+                    int firstOperatorIndex2 = firstOperatorsIndexOf(formula2, 0);
+                    String before2 = formula2.substring(0, firstOperatorIndex2);
+                    String after2 = formula2.substring(firstOperatorIndex2 + 1);
+
+
+                    int beforeOperatorIndex2 = beforeOperatorsIndexOf(before2, 0);
+                    int afterOperatorIndex2 = operatorsIndexOf(after2, 0);
+
+                    int formula2Value1 = Integer.parseInt(before2.substring(beforeOperatorIndex2 + 1));
+                    int formula2Value2 = Integer.parseInt(after2.substring(0, afterOperatorIndex2));
+
+                    int result2 = 0;
+                    switch (formula2.charAt(firstOperatorIndex)) {
+
+                        case '*':
+                            result2 = formula2Value1 * formula2Value2;
+                            break;
+
+
+                        case '/':
+                            result2= formula2Value1 / formula2Value2;
+                            break;
+                    }
+                    formula2 = before2.substring(0, beforeOperatorIndex2+ 1) + result2 + after2.substring(afterOperatorIndex2);
+                }
+                if (operatorsIndexOf(formula2,0) == -1){
+
+                    System.out.println("もう掛け算か割り算はありません");
+
+                }
             }
-
-            formula2 = before.substring(0, beforeOperatorIndex + 1) + result + after.substring(afterOperatorIndex);
-            System.out.println(formula2);
 
 
 
