@@ -1,4 +1,6 @@
 //1.四則演算の実装。(ex)1 + 1 + 1)
+import com.sun.source.tree.ClassTree;
+
 import java.util.Scanner;
 
 
@@ -24,13 +26,13 @@ public class Main {
             }
 
 
-            if(operatorsIndexOf(formula,0) != -1){
+            if(operatorsIndexOf(formula,0) != -1) {
                 int firstOperatorIndex = firstOperatorsIndexOf(formula, 0);
                 String before = formula.substring(0, firstOperatorIndex);
                 String after = formula.substring(firstOperatorIndex + 1);
 
 
-                int beforeOperatorIndex = beforeOperatorsIndexOf(before, 0);
+                int beforeOperatorIndex = beforeOperatorsIndexOf(before);
                 int afterOperatorIndex = operatorsIndexOf(after, 0);
 
                 int value1 = Integer.parseInt(before.substring(beforeOperatorIndex + 1));
@@ -52,20 +54,36 @@ public class Main {
                 String formula2 = before.substring(0, beforeOperatorIndex + 1) + result + after.substring(afterOperatorIndex);
 
 
-                while(operatorsIndexOf(formula2,0)!= -1){
+
+                while(firstOperatorsIndexOf(formula2,0)!= -1){
+
                     int firstOperatorIndex2 = firstOperatorsIndexOf(formula2, 0);
                     String before2 = formula2.substring(0, firstOperatorIndex2);
                     String after2 = formula2.substring(firstOperatorIndex2 + 1);
 
 
-                    int beforeOperatorIndex2 = beforeOperatorsIndexOf(before2, 0);
+
+
+                    int beforeOperatorIndex2 = beforeOperatorsIndexOf(before2);
                     int afterOperatorIndex2 = operatorsIndexOf(after2, 0);
 
-                    int formula2Value1 = Integer.parseInt(before2.substring(beforeOperatorIndex2 + 1));
-                    int formula2Value2 = Integer.parseInt(after2.substring(0, afterOperatorIndex2));
+                    int formula2Value2 = 0;
+                    int formula2Value1 = 0;
+                    if(beforeOperatorIndex2 == -1) {
+                         formula2Value1 = Integer.parseInt(before2);
+                    }else{
+                        formula2Value1 = Integer.parseInt(before2.substring(beforeOperatorIndex2+1));
+                    }
+                    if (afterOperatorIndex2 ==-1){
+                        formula2Value2 = Integer.parseInt((after2));
+                    }else{
+                        formula2Value2 = Integer.parseInt(after2.substring(0, afterOperatorIndex2));
+                    }
+
+
 
                     int result2 = 0;
-                    switch (formula2.charAt(firstOperatorIndex)) {
+                    switch (formula2.charAt(firstOperatorIndex2)) {
 
                         case '*':
                             result2 = formula2Value1 * formula2Value2;
@@ -76,12 +94,16 @@ public class Main {
                             result2= formula2Value1 / formula2Value2;
                             break;
                     }
-                    formula2 = before2.substring(0, beforeOperatorIndex2+ 1) + result2 + after2.substring(afterOperatorIndex2);
-                }
-                if (operatorsIndexOf(formula2,0) == -1){
 
-                    System.out.println("もう掛け算か割り算はありません");
 
+                    /*if(beforeOperatorIndex2 !=1&&afterOperatorIndex2 != -1){
+                    formula2 = before2.substring(0, beforeOperatorIndex2 +1) + result2 + after2.substring(afterOperatorIndex2);
+                    }else if(beforeOperatorIndex2 == -1 && afterOperatorIndex2 != -1){
+                        formula2 = result2 + after2.substring(afterOperatorIndex2);
+                    }else  if(beforeOperatorIndex2 != -1 && afterOperatorIndex2 == -1){
+                        formula2 = before2.substring(0,beforeOperatorIndex+1) + result2;
+                    }*/
+                    System.out.println(formula2);
                 }
             }
 
@@ -200,11 +222,11 @@ public class Main {
         }
         return firstIndex;
     }
-    public static int beforeOperatorsIndexOf(String reverse,int start) {
-        int operatorPlusIndex =reverse.indexOf("+",start);
-        int operatorMinusIndex = reverse.indexOf("-",start);
-        int operatorMultiplicationIndex = reverse.indexOf("*",start);
-        int operatorDivisionIndex =reverse.indexOf("/",start);
+    public static int beforeOperatorsIndexOf(String b) {
+        int operatorPlusIndex =b.lastIndexOf("+");
+        int operatorMinusIndex = b.lastIndexOf("-");
+        int operatorMultiplicationIndex = b.lastIndexOf("*");
+        int operatorDivisionIndex =b.lastIndexOf("/");
 
         int index = operatorPlusIndex;
 
