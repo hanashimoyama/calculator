@@ -16,6 +16,13 @@ public class Main {
             if (formula.equals("end")) {
                 System.exit(0);
             }
+
+            if(formula.indexOf("/0") != -1){
+                System.out.println("除算には0以外の整数を使用してください");
+                System.out.print("式:");
+                continue;
+            }
+
             int total = 0;
 
             int index1 = operatorsIndexOf(formula, 0);
