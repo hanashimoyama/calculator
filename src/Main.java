@@ -1,4 +1,6 @@
+import java.math.BigDecimal;
 import java.util.Scanner;
+import java.math.RoundingMode;
 
 
 public class Main {
@@ -17,13 +19,13 @@ public class Main {
                 System.exit(0);
             }
 
-            if(formula.indexOf("/0") != -1){
+            /*if(formula.indexOf("/0") != -1){
                 System.out.println("除算には0以外の整数を使用してください");
                 System.out.print("式:");
                 continue;
-            }
+            }*/
 
-            int total = 0;
+            BigDecimal total = new BigDecimal(0);
 
             int index1 = operatorsIndexOf(formula, 0);
 
@@ -47,32 +49,38 @@ public class Main {
                 int beforeOperatorIndex = beforeOperatorsIndexOf(before);
                 int afterOperatorIndex = operatorsIndexOf(after, 0);
 
-                int value1 = 0;
-                int value2 = 0;
+                BigDecimal value1 ;
+                BigDecimal value2 ;
                 if (beforeOperatorIndex == -1) {
 
-                    value1 = Integer.parseInt(before);
+                    value1 = new BigDecimal(before);;
                 } else {
-                    value1 = Integer.parseInt(before.substring(beforeOperatorIndex + 1));
+                    value1 = new BigDecimal(before.substring(beforeOperatorIndex + 1));
                 }
                 if (afterOperatorIndex == -1) {
-                    value2 = Integer.parseInt((after));
+                    value2 = new BigDecimal(after);
                 } else {
 
-                    value2 = Integer.parseInt(after.substring(0, afterOperatorIndex));
+                    value2 = new BigDecimal(after.substring(0, afterOperatorIndex));
                 }
 
-                int result = 0;
+                BigDecimal result = new BigDecimal(0);
                 switch (formula.charAt(firstOperatorIndex)) {
 
 
                     case '*':
-                        result = value1 * value2;
+                        result = value1.multiply(value2);
                         break;
 
 
                     case '/':
-                        result = value1 / value2;
+                        if(value2.signum() == 0){
+                            System.out.println("0以外の数字で入力してください");
+                            System.out.print("式:");
+                            continue;
+                        }else {
+                            result = value1.divide(value2,7,RoundingMode.DOWN);
+                        }
                         break;
                 }
                 if (beforeOperatorIndex != -1 && afterOperatorIndex != -1) {
@@ -102,33 +110,40 @@ public class Main {
                     int afterOperatorIndex2 = operatorsIndexOf(after2, 0);
 
 
-                    int formula2Value1 = 0;
-                    int formula2Value2 = 0;
+                    BigDecimal formula2Value1 ;
+                    BigDecimal formula2Value2 ;
                     if (beforeOperatorIndex2 == -1) {
 
-                        formula2Value1 = Integer.parseInt(before2);
+                        formula2Value1 = new BigDecimal(before2);
                     } else {
-                        formula2Value1 = Integer.parseInt(before2.substring(beforeOperatorIndex2 + 1));
+                        formula2Value1 = new BigDecimal(before2.substring(beforeOperatorIndex2 + 1));
                     }
                     if (afterOperatorIndex2 == -1) {
 
-                        formula2Value2 = Integer.parseInt((after2));
+                        formula2Value2 = new BigDecimal((after2));
                     } else {
-                        formula2Value2 = Integer.parseInt(after2.substring(0, afterOperatorIndex2));
+                        formula2Value2 = new BigDecimal(after2.substring(0, afterOperatorIndex2));
                     }
 
 
-                    int result2 = 0;
+                    BigDecimal result2 = new BigDecimal(0);
                     switch (formula2.charAt(firstOperatorIndex2)) {
 
                         case '*':
 
-                            result2 = formula2Value1 * formula2Value2;
+                            result2 = formula2Value1.multiply(formula2Value2);
                             break;
 
 
                         case '/':
-                            result2 = formula2Value1 / formula2Value2;
+                            if(formula2Value2.signum()==0) {
+                                System.out.println("0以外の数字を入力してください");
+                                System.out.print("式:");
+                                continue;
+                            }else{
+                                result2 = formula2Value1.divide(formula2Value2,7,RoundingMode.DOWN);
+
+                            }
                             break;
                     }
 
@@ -149,17 +164,17 @@ public class Main {
 
             if(operatorsIndexOf(formula2, 0) != -1) {
                 index1 = operatorsIndexOf(formula2,0);
-                total = Integer.parseInt(formula2.substring(0, index1));
+                total = new BigDecimal (formula2.substring(0, index1));
                 int index2 = operatorsIndexOf(formula2, index1 + 1);
                 while (index2 != -1) {
-                    int value2 = Integer.parseInt(formula2.substring(index1 + 1, index2));
+                    BigDecimal value2 = new BigDecimal(formula2.substring(index1 + 1, index2));
                     switch (formula2.charAt(index1)) {
                         case '+':
-                            total = total + value2;
+                            total = total.add(value2);
                             break;
 
                         case '-':
-                            total = total - value2;
+                            total = total.subtract(value2);
                             break;
 
 
@@ -167,23 +182,23 @@ public class Main {
                     index1 = index2;
                     index2 = operatorsIndexOf(formula2, index2 + 1);
                 }
-                int value2 = Integer.parseInt(formula2.substring(index1 + 1));
+                BigDecimal value2 = new BigDecimal(formula2.substring(index1 + 1));
                 switch (formula2.charAt(index1)) {
 
                     case '+':
-                        total = total + value2;
+                        total = total.add(value2);
                         break;
 
                     case '-':
-                        total = total - value2;
+                        total = total.subtract(value2);
                         break;
 
 
                 }
             } else {
-                total = Integer.parseInt(formula2);
+                total = new BigDecimal(formula2);
             }
-            System.out.println(total);
+            System.out.println(total.stripTrailingZeros());
             System.out.print("式:");
         }
     }
