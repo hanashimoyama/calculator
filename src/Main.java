@@ -25,9 +25,9 @@ public class Main {
                 continue;
             }*/
 
-            BigDecimal total = new BigDecimal(0);
+            BigDecimal total ;
 
-            int index1 = operatorsIndexOf(formula, 0);
+            int index1;
 
             int index = operatorsIndexOf(formula, 0);
             if (index == -1) {
