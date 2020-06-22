@@ -87,6 +87,7 @@ public class Main {
                     formula2 = String.valueOf(result);
                 }
 
+
                 while (firstOperatorsIndexOf(formula2) != -1) {
 
                     int firstOperatorIndex2 = firstOperatorsIndexOf(formula2);
@@ -147,6 +148,7 @@ public class Main {
             }
 
             if(operatorsIndexOf(formula2, 0) != -1) {
+                index1 = operatorsIndexOf(formula2,0);
                 total = Integer.parseInt(formula2.substring(0, index1));
                 int index2 = operatorsIndexOf(formula2, index1 + 1);
                 while (index2 != -1) {
