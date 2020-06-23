@@ -36,15 +36,8 @@ public class Main {
                 continue;
             }
 
-            if (firstOperatorsIndexOf(formula) != -1) {
-
-                int firstOperatorIndex = firstOperatorsIndexOf(formula);
-
-                String before = formula.substring(0, firstOperatorIndex);
-
-                String after = formula.substring(firstOperatorIndex + 1);
-
-
+                if (firstOperatorsIndexOf(formula) != -1) {
+                    int firstOperatorIndex = firstOperatorsIndexOf(formula);
 
                 int beforeOperatorIndex = beforeOperatorsIndexOf(before);
                 int afterOperatorIndex = operatorsIndexOf(after, 0);
