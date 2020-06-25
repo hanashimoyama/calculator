@@ -58,7 +58,7 @@ public class Analysis {
         return beforeIndex;
     }
 
-    public static String[] Split(String formula) {
+    public static String[] split(String formula) {
         int firstOperatorIndex = (firstOperatorsIndexOf(formula));
 
         String formulas[] = new String[2];
@@ -73,11 +73,12 @@ public class Analysis {
         formulasIndex[0] = beforeOperatorsIndexOf(before);
         formulasIndex[1] = operatorsIndexOf(after, 0);
 
+
         return formulasIndex;
 
     }
 
-    public  static String[] numbers(String before, String after,int beforeOperatorIndex, int afterOperatorIndex){
+    public static String[] numbers(String before, String after, int beforeOperatorIndex, int afterOperatorIndex) {
         String numbers[] = new String[2];
 
         if (beforeOperatorIndex == -1) {
@@ -87,11 +88,25 @@ public class Analysis {
         }
         if (afterOperatorIndex == -1) {
 
-             numbers[1] = after;
+            numbers[1] = after;
         } else {
-             numbers[1] = after.substring(0, afterOperatorIndex);
+            numbers[1] = after.substring(0, afterOperatorIndex);
         }
         return numbers;
     }
-}
 
+    public static String newFormula(String before, String after, int beforeOperatorIndex, int afterOperatorIndex, BigDecimal result){
+        String formula2;
+        if (beforeOperatorIndex != -1 && afterOperatorIndex != -1) {
+            formula2 = before.substring(0, beforeOperatorIndex + 1) + result + after.substring(afterOperatorIndex);
+        } else if (beforeOperatorIndex == -1 && afterOperatorIndex != -1) {
+            formula2 = result + after.substring(afterOperatorIndex);
+        } else if (beforeOperatorIndex != -1 && afterOperatorIndex == -1) {
+            formula2 = before.substring(0, beforeOperatorIndex + 1) + result;
+        } else{
+            formula2 = String.valueOf(result);
+        }
+
+        return formula2;
+    }
+}

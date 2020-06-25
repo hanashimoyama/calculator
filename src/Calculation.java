@@ -2,13 +2,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Calculation {
-    private String num1, num2, op ;
-    private BigDecimal answer = new BigDecimal(0);
+    public String num1, num2, op ;
+    public BigDecimal answer = new BigDecimal(0);
 
 
 
 
-    public BigDecimal Calculating(String num1,String num2,String op) {
+    public static BigDecimal calculating(String num1,String num2,String op) {
         BigDecimal result = new BigDecimal(0);
         BigDecimal value1 = new BigDecimal(num1);
         BigDecimal value2 = new BigDecimal(num2);

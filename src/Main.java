@@ -1,3 +1,4 @@
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 import java.math.RoundingMode;
@@ -5,8 +6,8 @@ import java.math.RoundingMode;
 
 public class Main {
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
+        Formula.formula();
+        /*Scanner sc = new Scanner(System.in);
         System.out.println("計算したい時:式を入力　終了したい時:endと入力");
         System.out.print("式:");
         while (sc.hasNextLine()) {
@@ -25,7 +26,7 @@ public class Main {
                 continue;
             }*/
 
-            BigDecimal total ;
+            /*BigDecimal total ;
 
             int index1;
 
@@ -36,8 +37,15 @@ public class Main {
                 continue;
             }
 
-                if (firstOperatorsIndexOf(formula) != -1) {
-                    int firstOperatorIndex = firstOperatorsIndexOf(formula);
+            if (firstOperatorsIndexOf(formula) != -1) {
+
+                int firstOperatorIndex = firstOperatorsIndexOf(formula);
+
+                String before = formula.substring(0, firstOperatorIndex);
+
+                String after = formula.substring(firstOperatorIndex + 1);
+
+
 
                 int beforeOperatorIndex = beforeOperatorsIndexOf(before);
                 int afterOperatorIndex = operatorsIndexOf(after, 0);
@@ -248,4 +256,6 @@ public class Main {
         return index;
     }
 
+             */
+    }
 }
