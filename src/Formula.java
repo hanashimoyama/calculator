@@ -69,19 +69,21 @@ public class Formula {
                  index1 = Analysis.operatorsIndexOf(formula2,0);
                 int index2 = Analysis.operatorsIndexOf(formula2, index1 + 1);
                 total = formula2.substring(0, index1);
-                String value2 = formula2.substring(index1 + 1, index2);
-                String op = formula.substring(index1,index1+1);
+                String op = formula2.substring(index1,index1+1);
                 while (index2 != -1) {
-                    Calculation.calculating(total, value2, op);
+                    String value2 = formula2.substring(index1 + 1, index2);
+                    total = String.valueOf(Calculation.calculating(total, value2, op));
                     index1 = index2;
                     index2 = Analysis.operatorsIndexOf(formula2, index2 + 1);
                 }
-                 value2 = formula2.substring(index1 + 1);
-                 op = formula2.substring(index1,+1);
-                Calculation.calculating(total,value2,op);
+                 String value2 = formula2.substring(index1 + 1);
+                 op = formula2.substring(index1,index1+1);
+                total =(Calculation.calculating(total,value2,op)).toString();
             } else{
                 total = formula2;
-            } System.out.println(new BigDecimal(total).stripTrailingZeros());
+            }
+            System.out.println(new BigDecimal(total).stripTrailingZeros());
+            System.out.print("式:");
         }
     }
 }
