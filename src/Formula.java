@@ -10,7 +10,7 @@ public class Formula {
             String line = sc.nextLine();
             String formula = line.replace(" ", "");
             int index1 = 0;
-            String total = "";
+            String total ;
 
             String formula2 = formula;
             if (formula.equals("end")) {
@@ -78,12 +78,14 @@ public class Formula {
                 }
                  String value2 = formula2.substring(index1 + 1);
                  op = formula2.substring(index1,index1+1);
-                total =(Calculation.calculating(total,value2,op)).toString();
+                    total =(Calculation.calculating(total,value2,op)).toPlainString();
             } else{
                 total = formula2;
             }
-            System.out.println(new BigDecimal(total).stripTrailingZeros());
+
+            System.out.println(new BigDecimal(total).stripTrailingZeros().toPlainString());
             System.out.print("式:");
         }
     }
+
 }

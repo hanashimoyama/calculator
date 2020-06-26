@@ -2,13 +2,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Calculation {
-    public String num1, num2, op ;
-    public BigDecimal answer = new BigDecimal(0);
+    private String num1, num2, op ;
 
 
 
 
-    public static BigDecimal calculating(String num1,String num2,String op) {
+    public static BigDecimal calculating(String num1, String num2, String op) {
         BigDecimal result = new BigDecimal(0);
         BigDecimal value1 = new BigDecimal(num1);
         BigDecimal value2 = new BigDecimal(num2);
@@ -26,13 +25,8 @@ public class Calculation {
                 break;
 
             case "/":
-                if(value1.signum()==0) {
-                    System.out.println("0以外の数字を入力してください");
-                    System.out.print("式:");
-                }else{
-                    result= value1.divide(value2,7, RoundingMode.DOWN);
+                result= value1.divide(value2,7, RoundingMode.DOWN);
 
-                }
                 break;
         }
         return result;

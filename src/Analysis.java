@@ -104,7 +104,7 @@ public class Analysis {
         } else if (beforeOperatorIndex != -1 && afterOperatorIndex == -1) {
             formula2 = before.substring(0, beforeOperatorIndex + 1) + result;
         } else{
-            formula2 = result.toString();
+            formula2 = result.toPlainString();
         }
 
         return formula2;
