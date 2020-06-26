@@ -11,6 +11,7 @@ public class Formula {
             String formula = line.replace(" ", "");
             int index1 = 0;
             String total ;
+            BigDecimal result = new BigDecimal(0);
 
             String formula2 = formula;
             if (formula.equals("end")) {
@@ -39,7 +40,13 @@ public class Formula {
                 String value2 = numbers[1];
                 String op = formula.substring(firstOperatorIndex,firstOperatorIndex+1);
 
-                BigDecimal result = Calculation.calculating(value1,value2,op);
+
+                try{
+                    result = Calculation.calculating(value1,value2,op);
+                }catch (ArithmeticException ex){
+                    System.out.println("ゼロ除算はできません");
+                    break;
+                }
 
                 formula2 = Analysis.newFormula(before,after,beforeOperatorIndex,afterOperatorIndex,result);
 
@@ -66,7 +73,7 @@ public class Formula {
                 formula2 = formula;
             }if(Analysis.operatorsIndexOf(formula2, 0) != -1){
 
-                 index1 = Analysis.operatorsIndexOf(formula2,0);
+                index1 = Analysis.operatorsIndexOf(formula2,0);
                 int index2 = Analysis.operatorsIndexOf(formula2, index1 + 1);
                 total = formula2.substring(0, index1);
                 String op = formula2.substring(index1,index1+1);
@@ -76,16 +83,16 @@ public class Formula {
                     index1 = index2;
                     index2 = Analysis.operatorsIndexOf(formula2, index2 + 1);
                 }
-                 String value2 = formula2.substring(index1 + 1);
-                 op = formula2.substring(index1,index1+1);
-                    total =(Calculation.calculating(total,value2,op)).toPlainString();
+                String value2 = formula2.substring(index1 + 1);
+                op = formula2.substring(index1,index1+1);
+                total =(Calculation.calculating(total,value2,op)).toPlainString();
             } else{
                 total = formula2;
             }
-
             System.out.println(new BigDecimal(total).stripTrailingZeros().toPlainString());
             System.out.print("式:");
         }
     }
 
 }
+
