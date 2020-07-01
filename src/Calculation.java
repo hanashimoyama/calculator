@@ -22,7 +22,7 @@ public class Calculation {
                 break;
 
             case "/":
-                result= value1.divide(value2,7, RoundingMode.DOWN);
+                result = value1.divide(value2, 7, RoundingMode.DOWN);
                 break;
 
         }
